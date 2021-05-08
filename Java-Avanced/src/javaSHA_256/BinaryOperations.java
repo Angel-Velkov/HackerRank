@@ -16,7 +16,51 @@ public final class BinaryOperations {
         return binaryRecord;
     }
 
-    public static int[][] convertFrom8_ByteWordTo32_ByteWord(int[][] byte_8Words) {
+    public static String toHex(int[] binarySet) {
+        StringBuilder hex = new StringBuilder();
+
+        int start = 0;
+        int end;
+        for (int i = 0; i < binarySet.length / 4; i++) {
+            end = start + 3;
+            int[] piece = new int[4];
+            System.arraycopy(binarySet, start, piece, 0, piece.length);
+            start = end + 1;
+
+            hex.append(getHexDigit(piece));
+        }
+        return hex.toString();
+    }
+
+    private static char getHexDigit(int[] binarySet) {
+        if (binarySet.length != 4) {
+            throw new IllegalArgumentException("Binary set length should be 4");
+        }
+
+        byte result = 0;
+        for (int i = binarySet.length - 1; i >= 0; i--) {
+            result += binarySet[i] * Math.pow(2, binarySet.length - 1 - i);
+        }
+
+        switch (result) {
+            case 10:
+                return 'A';
+            case 11:
+                return 'B';
+            case 12:
+                return 'C';
+            case 13:
+                return 'D';
+            case 14:
+                return 'E';
+            case 15:
+                return 'F';
+            default:
+                return String.valueOf(result).charAt(0);
+        }
+    }
+
+    public static int[][] to32_ByteWord(int[][] byte_8Words) {
         int[][] byte_32Words = new int[16][Integer.SIZE];
 
         int r8 = 0;
@@ -37,7 +81,13 @@ public final class BinaryOperations {
     }
 
     public static int[] sum(int[] firstArr, int[] secondArr) {
-        //TODO: Ensure that they are the same length
+        if (firstArr.length > secondArr.length) {
+            secondArr = extendArrayInFront(secondArr, firstArr.length);
+
+        } else if (firstArr.length < secondArr.length) {
+            firstArr = extendArrayInFront(firstArr, secondArr.length);
+        }
+
         int[] sum = new int[firstArr.length];
 
         boolean hasAddition = false;
@@ -69,5 +119,16 @@ public final class BinaryOperations {
         }
 
         return sum;
+    }
+
+    private static int[] extendArrayInFront(int[] arr, int newLength) {
+        int[] extendedArr = new int[newLength];
+        int pointer = arr.length - 1;
+
+        for (int i = extendedArr.length - 1; i >= 0; i--) {
+            extendedArr[i] = arr[pointer--];
+        }
+        arr = extendedArr;
+        return arr;
     }
 }

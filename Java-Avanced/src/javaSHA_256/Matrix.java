@@ -3,6 +3,7 @@ package javaSHA_256;
 import java.util.Arrays;
 
 public final class Matrix {
+
     private Matrix() {
     }
 

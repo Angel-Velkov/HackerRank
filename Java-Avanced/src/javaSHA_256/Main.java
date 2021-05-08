@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 
 import static javaSHA_256.JavaSHA_256.getSHA_256;
 
+// Original function
   /*
     public static void main(String[] args) throws NoSuchAlgorithmException {
         Scanner input = new Scanner(System.in);
@@ -23,8 +24,8 @@ public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
-        String line = "hello world";
+        String line = reader.readLine();
 
-        getSHA_256(line);
+        System.out.println(getSHA_256(line));
     }
 }

@@ -53,6 +53,7 @@ public final class BitwiseOperators {
                 result[i] = 1;
             }
         }
+
         return result;
     }
 
