@@ -44,17 +44,17 @@ public final class BinaryOperations {
 
         switch (result) {
             case 10:
-                return 'A';
+                return 'a';
             case 11:
-                return 'B';
+                return 'b';
             case 12:
-                return 'C';
+                return 'c';
             case 13:
-                return 'D';
+                return 'd';
             case 14:
-                return 'E';
+                return 'e';
             case 15:
-                return 'F';
+                return 'f';
             default:
                 return String.valueOf(result).charAt(0);
         }
